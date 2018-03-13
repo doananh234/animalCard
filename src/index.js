@@ -36,23 +36,6 @@ render(
         <Provider store={store}>
           <TranslationProvider>
             <ConnectedRouter history={history}>
-              <MuiThemeProvider>
-                <ErrorLayout
-                  path="/error"
-                  component={Loadable({
-                    loader: () => import('./routes/ErrorRoute'),
-                    loading: Loading,
-                  })}
-                />
-                <PublicLayout
-                  path="/auth"
-                  component={Loadable({
-                    loader: () => import('./routes/PublicRoute'),
-                    loading: Loading,
-                  })}
-                  locale={currentAppLocale.antd.locale}
-                  selectedTheme={themeConfig.theme}
-                />
                 <PrivateLayout
                   path="/"
                   component={Loadable({
@@ -62,7 +45,6 @@ render(
                   locale={currentAppLocale.antd.locale}
                   selectedTheme={themeConfig.theme}
                 />
-              </MuiThemeProvider>
             </ConnectedRouter>
           </TranslationProvider>
         </Provider>

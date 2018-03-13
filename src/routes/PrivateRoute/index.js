@@ -14,7 +14,8 @@ import { siteConfig } from '../../config';
 import appActions from '../../redux/app/actions';
 import AppHolder from './style';
 import { PostList } from '../../containers/Post';
-
+import { Card, Button } from 'antd';
+import { VoicePlayer, VoiceRecognition } from '../../components/voice'; 
 const { Content, Footer } = Layout;
 const { toggleAll } = appActions;
 
@@ -27,92 +28,28 @@ const authorizedRoutes = [
       loading: Loading,
     }),
     exact: true,
-  },
-  {
-    path: '/profile',
-    component: Loadable({
-      loader: () => import('../../containers/Profile'),
-      loading: Loading,
-    }),
-    role: [],
-  },
-  {},
+  }
 ];
 
 class PrivateRoute extends Component {
   componentDidMount() {}
+  onStart = () => {
+    this.refs.voicePlayer.speak()
+  }
   render() {
     const { match } = this.props;
     return (
       <div className="authorized-layout">
         <AppHolder>
-          <Layout style={{ height: '100vh' }}>
-            <Debounce time="1000" handler="onResize">
-              <WindowResizeListener
-                onResize={windowSize =>
-                  this.props.toggleAll(windowSize.windowWidth, windowSize.windowHeight)}
-              />
-            </Debounce>
-            <Topbar />
-            <Layout style={{ flexDirection: 'row', overflowX: 'hidden' }}>
-              <Sidebar />
-              <Layout
-                className="isoContentMainLayout"
-                style={{
-                  height: '100vh',
-                }}
-              >
-                <Content
-                  className="isomorphicContent"
-                  style={{
-                    padding: '70px 0 0',
-                    flexShrink: '0',
-                    background: '#f1f3f6',
-                  }}
-                >
-                  <Switch>
-                    {/* {authorizedRoutes.map(
-                      ({ path, component, exact, role }) => {
-                        const fullPath =
-                          match.path === '/' ? path : match.path + path;
-                        return (
-                          <AuthorizeRoute
-                            exact={exact}
-                            path={fullPath}
-                            component={component}
-                            role={role}
-                            key={fullPath}
-                          />
-                        );
-                      },
-                    )}
-                    <Redirect
-                      to={
-                        match.path === '/'
-                          ? authorizedRoutes[0].path
-                          : match.path + authorizedRoutes[0].path
-                      }
-                    /> */}
-                    <Route
-                      exact
-                      path="/grades"
-                      hasCreate
-                      render={routeProps => <PostList resource="Grade" {...routeProps} />}
-                    />
-                  </Switch>
-                </Content>
-                <Footer
-                  style={{
-                    background: '#ffffff',
-                    textAlign: 'center',
-                    borderTop: '1px solid #ededed',
-                  }}
-                >
-                  {siteConfig.footerText}
-                </Footer>
-              </Layout>
-            </Layout>
-          </Layout>
+        <Card title="Card title" extra={<Button onClick={this.onStart}>start</Button>} style={{ width: 300 }}>
+    <p>Card content</p>
+    <VoicePlayer
+        onEnd={() =>{}}
+        onStart={() =>{}}
+        ref='voicePlayer'
+        text="React voice player demonstration"
+      />
+  </Card>
         </AppHolder>
       </div>
     );
