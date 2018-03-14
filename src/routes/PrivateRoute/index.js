@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Redirect, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import { Layout } from 'antd';
 import { Debounce } from 'react-throttle';
 import WindowResizeListener from 'react-window-size-listener';
 import Topbar from '../../containers/common/Topbar';
@@ -14,11 +13,11 @@ import { siteConfig } from '../../config';
 import appActions from '../../redux/app/actions';
 import AppHolder from './style';
 import { PostList } from '../../containers/Post';
-import { Card, Button } from 'antd';
-import { VoicePlayer, VoiceRecognition } from '../../components/voice'; 
-const { Content, Footer } = Layout;
+import { Card, Button, Layout, Icon, Avatar, Select } from 'antd';
+import { VoicePlayer, VoiceRecognition } from '../../components/voice';
 const { toggleAll } = appActions;
-
+const { Header, Content, Footer, Sider } = Layout;
+const data = require('./animal.json');
 // Pages
 const authorizedRoutes = [
   {
@@ -32,26 +31,42 @@ const authorizedRoutes = [
 ];
 
 class PrivateRoute extends Component {
-  componentDidMount() {}
+  state = {
+    selected: 0
+  }
+  componentDidMount() { }
   onStart = () => {
     this.refs.voicePlayer.speak()
   }
+  handleChange = (e) => {
+    this.setState({ selected: e });
+  };
   render() {
     const { match } = this.props;
+
     return (
-      <div className="authorized-layout">
-        <AppHolder>
-        <Card title="Card title" extra={<Button onClick={this.onStart}>start</Button>} style={{ width: 300 }}>
-    <p>Card content</p>
-    <VoicePlayer
-        onEnd={() =>{}}
-        onStart={() =>{}}
-        ref='voicePlayer'
-        text="React voice player demonstration"
-      />
-  </Card>
-        </AppHolder>
-      </div>
+      <Layout style={{ padding: '0 24px 24px' }}>
+        <VoicePlayer
+          onEnd={() => { }}
+          onStart={() => { }}
+          ref='voicePlayer'
+          text={data[this.state.selected] ? data[this.state.selected].text : ''}
+        />
+        <Sider style={{ background: 'white' }}>
+          <Card
+            actions={[<Button onClick={this.onStart}><Icon type="play-circle" /></Button>]}
+          >
+            <div>
+              <Select defaultValue={data[0].text} style={{ width: 120 }} onChange={this.handleChange}>
+                {data.map((animal, index) => <Select.Option value={index}>{animal.text}</Select.Option>)}
+              </Select>
+            </div>
+          </Card>
+        </Sider>
+        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+          {this.state.selected >= 0 ? <img style={{ width: '100%' }} src={data[this.state.selected].src} /> : null}
+        </Content>
+      </Layout>
     );
   }
 }

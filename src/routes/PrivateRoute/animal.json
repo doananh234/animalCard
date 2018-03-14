@@ -1,0 +1,31 @@
+[
+	{
+		"src": "https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/H-P/lion-male-roar.ngsversion.1466679939988.adapt.1900.1.jpg",
+		"text": "lion"
+	},
+	{
+		"src": "https://storage.googleapis.com/nom-nom-now/images/breeds/pit-bull.jpg",
+		"text": "dog"
+	},
+	{
+		"src": "https://www.pets4homes.co.uk/images/articles/771/large/cat-lifespan-the-life-expectancy-of-cats-568e40723c336.jpg",
+		"text": "cat"
+	},
+	{
+		"src": "http://agrodaily.com/wp-content/uploads/2017/02/chicken3.jpg",
+		"text": "chicken"
+	},
+	{
+		"src": "https://cdn.thinglink.me/api/image/648213306380648448/1240/10/scaletowidth",
+		"text": "pig"
+	},
+	{
+		"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Indian_Water_Buffalo_Bubalus_arnee_by_Dr_Raju_Kasambe_IMG_0347_%2811%29_%28cropped%29.jpg/1200px-Indian_Water_Buffalo_Bubalus_arnee_by_Dr_Raju_Kasambe_IMG_0347_%2811%29_%28cropped%29.jpg",
+		"text": "buffalo"
+	},
+	{
+		"src": "https://www.pets4homes.co.uk/images/articles/1989/large/5-duck-breeds-that-are-great-to-keep-in-the-garden-53e8c3f008b34.jpg",
+		"text": "duck"
+	}
+
+]

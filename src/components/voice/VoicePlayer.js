@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-
+const defaults = {
+  text: '',
+  volume: 1,
+  rate: 1,
+  pitch: 1,
+  lang: 'en-US'
+};
 class VoicePlayer extends Component {
   constructor (props) {
     super(props)
@@ -17,13 +23,6 @@ class VoicePlayer extends Component {
   }
 
   createSpeech = () => {
-    const defaults = {
-      text: '',
-      volume: 1,
-      rate: 1,
-      pitch: 1,
-      lang: 'en-US'
-    }
 
     const options = Object.assign({}, defaults, this.props)
 
@@ -39,6 +38,8 @@ class VoicePlayer extends Component {
   }
 
   speak = () => {
+    const options = Object.assign({}, defaults, this.props);
+    this.speech.text = options.text
     window.speechSynthesis.speak(this.speech)
     this.setState({ started: true, playing: true })
   }
